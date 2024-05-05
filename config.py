@@ -5,6 +5,11 @@ class BaseConfig(object):
     TESTING = False
     
     # More base variable config here...
+    
+    # SQL ALCHEMY CONFIGURATIONS
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///app.db'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    BUNDLE_ERRORS = True
 
 class ProductionConfig(BaseConfig):
     DEBUG = False
