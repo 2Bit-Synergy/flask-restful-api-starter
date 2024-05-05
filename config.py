@@ -13,7 +13,7 @@ class BaseConfig(object):
 
 class ProductionConfig(BaseConfig):
     DEBUG = False
-    SECRET_KEY = open('secret_key_directory').read()
+    # SECRET_KEY = open('secret_key_directory').read()
 
 class StagingConfig(BaseConfig):
     DEBUG = True

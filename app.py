@@ -1,7 +1,9 @@
 from flask import Flask, jsonify
+from flask_restful import Api
+from flask_sqlalchemy import SQLAlchemy
 from werkzeug.exceptions import default_exceptions, HTTPException
 
-from config import config
+import config
 
 app = Flask(__name__, static_folder="/static")
 
@@ -19,9 +21,15 @@ for ex in default_exceptions:
     app.register_error_handler(ex, handle_error)
     
 # Set config
-app.config['SQLALCHEMY_DATABASE_URI'] = config.SQLALCHEMY_DATABASE_URI
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = config.SQLALCHEMY_TRACK_MODIFICATIONS
-app.config['BUNDLE_ERRORS'] = config.BUNDLE_ERRORS
+app.config['SQLALCHEMY_DATABASE_URI'] = config.DevelopmentConfig.SQLALCHEMY_DATABASE_URI
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = config.DevelopmentConfig.SQLALCHEMY_TRACK_MODIFICATIONS
+app.config['BUNDLE_ERRORS'] = config.DevelopmentConfig.BUNDLE_ERRORS
+
+db = SQLAlchemy(app)
+api = Api(app)
+
+# ex: api or api/v1 or api/v2
+api.prefix = '/api' # Prefix for all routes
 
 @app.route("/")
 def hello_world():
