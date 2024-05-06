@@ -22,3 +22,5 @@ class DevelopmentConfig(BaseConfig):
     DEBUG = True
     TESTING = True
     SECRET_KEY = 'random+key'
+    
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:password@postgres:5432/app_db'
